@@ -253,20 +253,9 @@ left join service_included si on  si.si_id = cd.si_id
 group by c.c_id, c.c_name, t.tc_type, contractID
 order by c.c_id;
 
-
-select c.c_id, c_name, t.tc_type, co.id as contractID, s.s_name, co.contract_day, co.end_day, sum(s.s_price + (ifnull(cd.cd_quantity*si.si_price, 0))) as total
-from customer c join type_customer t on c.tc_id = t.tc_id
-left join contract co on co.c_id = c.c_id
-left join service s on s.s_id = co.s_id
-left join contract_detail cd on cd.contract_id = co.id
-left join service_included si on  si.si_id = cd.si_id
-group by c.c_id, c.c_name, t.tc_type, contractID, s_name, contract_day, end_day
-order by c.c_id;
-
-select sum(cd.cd_quantity*si.si_price) as total_si, cd.contract_id
-from contract_detail cd join service_included si on  si.si_id = cd.si_id
-group by cd.contract_id;
-
+-- select sum(cd.cd_quantity*si.si_price) as total_si, cd.contract_id
+-- from contract_detail cd join service_included si on  si.si_id = cd.si_id
+-- group by cd.contract_id;
 
 -- select @@sql_mode;
 -- SET sql_mode = 'ONLY_FULL_GROUP_BY';
@@ -318,11 +307,18 @@ group by c1.c_name;
 -- 9.	Thực hiện thống kê doanh thu theo tháng,
 --  nghĩa là tương ứng với mỗi tháng trong năm 2021 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng.
 
-
+select month(contract_day) as `Month`, count(c_id) as `customers number`
+from contract co
+where year(contract_day) = 2021
+group by `Month`
+order by `Month` asc;
 
 -- 10.	Hiển thị thông tin tương ứng với từng hợp đồng thì đã sử dụng bao nhiêu dịch vụ đi kèm.
 --  Kết quả hiển thị bao gồm ma_hop_dong, ngay_lam_hop_dong, ngay_ket_thuc, tien_dat_coc, so_luong_dich_vu_di_kem
 --  (được tính dựa trên việc sum so_luong ở dich_vu_di_kem).
 
-
+select co.id, co.contract_day, co.end_day, co.deposit, sum(cd.cd_quantity) as quantity_si
+from contract co left join contract_detail cd on co.id = cd.contract_id
+group by co.id
+order by co.id asc;
    
