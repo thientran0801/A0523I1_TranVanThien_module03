@@ -362,17 +362,25 @@ group by co.id;
 -- (Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều như nhau).
 
 select si.si_id, si.si_name, sum(cd.cd_quantity) as quantity
-from contract co join contract_detail cd on co.id = cd.contract_id
-join service_included si using(si_id)
+from contract_detail cd join service_included si using(si_id)
 group by si.si_id
-having quantity in (
-select sum(cd.cd_quantity) as quantity
-from contract co join contract_detail cd on co.id = cd.contract_id
-join service_included si using(si_id)
-group by si.si_id
-order by quantity desc
-limit 1
-)
+having quantity in 
+(
+select max(cd.cd_quantity) as `max`
+from contract_detail cd
+group by si_id
+);
+
+select sum(cd_quantity)
+from contract_detail
+group by si_id
+order by sum(cd_quantity) desc
+limit 1;
+
+select max(cd_quantity)
+from contract_detail
+group by si_id
+
 
 
 -- 14.	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị bao gồm ma_hop_dong, ten_loai_dich_vu, ten_dich_vu_di_kem, so_lan_su_dung (được tính dựa trên việc count các ma_dich_vu_di_kem).
