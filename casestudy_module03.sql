@@ -321,4 +321,71 @@ select co.id, co.contract_day, co.end_day, co.deposit, sum(cd.cd_quantity) as qu
 from contract co left join contract_detail cd on co.id = cd.contract_id
 group by co.id
 order by co.id asc;
+
+-- 11.	Hiển thị thông tin các dịch vụ đi kèm 
+-- đã được sử dụng bởi những khách hàng 
+-- có ten_loai_khach là “Diamond” và 
+-- có dia_chi ở “Vinh” hoặc “Quảng Ngãi”.
+
+select si.*
+from service_included si join contract_detail cd using(si_id)
+join contract co on co.id = cd.contract_id
+where co.c_id in (select c.c_id
+from customer c join type_customer tc using (tc_id)
+where substring_index(c.c_address, ', ',-1) = 'Vinh' or substring_index(c.c_address, ', ',-1) = 'Quảng Ngãi' and tc.tc_type = 'Diamond'
+)
+order by si.si_id;
+
+-- 12.	Hiển thị thông tin ma_hop_dong, ho_ten (nhân viên), ho_ten (khách hàng), so_dien_thoai (khách hàng), ten_dich_vu, so_luong_dich_vu_di_kem
+--  (được tính dựa trên việc sum so_luong ở dich_vu_di_kem), tien_dat_coc của tất cả các dịch vụ 
+--  đã từng được khách hàng đặt vào 3 tháng cuối năm 2020
+-- nhưng chưa từng được khách hàng đặt vào 6 tháng đầu năm 2021.
+
+select co.id as contractID, e.e_name, c.c_name, c.c_phonenumber,s.s_id, s.s_name, ifnull(sum(cd.cd_quantity),0) as quantity, co.deposit
+from contract co join customer c using (c_id)
+join employee e using (e_id)
+join service s using (s_id)
+left join contract_detail cd on co.id = cd.contract_id
+where co.id in (
+select id
+from contract
+where year(contract_day) = 2020 and month(contract_day) between 10 and 12
+)
+and co.id not in (
+select id
+from contract
+where year(contract_day) = 2021 and month(contract_day) between 1 and 6
+)
+group by co.id;
+
+-- 13.	Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng.
+-- (Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều như nhau).
+
+select si.si_id, si.si_name, sum(cd.cd_quantity) as quantity
+from contract co join contract_detail cd on co.id = cd.contract_id
+join service_included si using(si_id)
+group by si.si_id
+having quantity in (
+select sum(cd.cd_quantity) as quantity
+from contract co join contract_detail cd on co.id = cd.contract_id
+join service_included si using(si_id)
+group by si.si_id
+order by quantity desc
+limit 1
+)
+
+
+-- 14.	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị bao gồm ma_hop_dong, ten_loai_dich_vu, ten_dich_vu_di_kem, so_lan_su_dung (được tính dựa trên việc count các ma_dich_vu_di_kem).
+
+-- 15.	Hiển thi thông tin của tất cả nhân viên bao gồm ma_nhan_vien, ho_ten, ten_trinh_do, ten_bo_phan, so_dien_thoai, dia_chi mới chỉ lập được tối đa 3 hợp đồng từ năm 2020 đến 2021.
+-- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
+
+-- 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond, chỉ cập nhật những khách hàng đã từng đặt phòng với Tổng Tiền thanh toán trong năm 2021 là lớn hơn 10.000.000 VNĐ.
+
+-- 18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).
+
+-- 19.	Cập nhật giá cho các dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2020 lên gấp đôi.
+
+-- 20.	Hiển thị thông tin của tất cả các nhân viên và khách hàng có trong hệ thống, thông tin hiển thị bao gồm id (ma_nhan_vien, ma_khach_hang), ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi.
+
    
