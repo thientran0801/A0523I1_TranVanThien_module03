@@ -363,29 +363,51 @@ group by co.id;
 
 select si.si_id, si.si_name, sum(cd.cd_quantity) as quantity
 from contract_detail cd join service_included si using(si_id)
-group by si.si_id
-having quantity in 
+group by si.si_id    
+having quantity = 
 (
-select max(cd.cd_quantity) as `max`
-from contract_detail cd
+select sum(cd_quantity) as total
+from contract_detail
+group by si_id
+order by total desc
+limit 1
+);
+
+select si.si_id, si.si_name, sum(cd.cd_quantity) as quantity
+from contract_detail cd join service_included si using(si_id)
+group by si.si_id    
+having quantity >= all 
+(
+select sum(cd_quantity) as total
+from contract_detail
 group by si_id
 );
 
-select sum(cd_quantity)
-from contract_detail
-group by si_id
-order by sum(cd_quantity) desc
-limit 1;
+-- 14.	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. 
+-- Thông tin hiển thị bao gồm ma_hop_dong, ten_loai_dich_vu, ten_dich_vu_di_kem, so_lan_su_dung (được tính dựa trên việc count các ma_dich_vu_di_kem).
 
-select max(cd_quantity)
-from contract_detail
-group by si_id
+select co.id, s.s_name, si.si_name, sum(cd.cd_quantity) as total
+from service_included si join contract_detail cd using(si_id)
+join contract co on co.id = cd.contract_id
+join service s using(s_id)
+group by co.id, s.s_name, si.si_name
+having total = 1;
 
 
+-- 15.	Hiển thi thông tin của tất cả nhân viên bao gồm 
+-- ma_nhan_vien, ho_ten, ten_trinh_do, ten_bo_phan, so_dien_thoai, dia_chi 
+-- mới chỉ lập được tối đa 3 hợp đồng từ năm 2020 đến 2021.
 
--- 14.	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị bao gồm ma_hop_dong, ten_loai_dich_vu, ten_dich_vu_di_kem, so_lan_su_dung (được tính dựa trên việc count các ma_dich_vu_di_kem).
-
--- 15.	Hiển thi thông tin của tất cả nhân viên bao gồm ma_nhan_vien, ho_ten, ten_trinh_do, ten_bo_phan, so_dien_thoai, dia_chi mới chỉ lập được tối đa 3 hợp đồng từ năm 2020 đến 2021.
+select e.e_id, e.e_name, le.le_level, de.de_department, e.e_phonenumber, e.e_address
+from employee e join level_employee le using(le_id)
+join department_employee de using(de_id)
+where e.e_id in 
+(
+select  e.e_id
+from employee e join contract co using(e_id)
+group by e_id
+having count(e.e_id) between 0 and 3
+);
 -- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
 
 -- 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond, chỉ cập nhật những khách hàng đã từng đặt phòng với Tổng Tiền thanh toán trong năm 2021 là lớn hơn 10.000.000 VNĐ.
