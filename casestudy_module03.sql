@@ -1,5 +1,3 @@
-
-
 --  taske 2 : Hiển thị thông tin của tất cả nhân viên có trong hệ thống có tên bắt đầu là một trong các ký tự “H”, “T” hoặc “K” và có tối đa 15 kí tự.
 
 select * from employee
@@ -201,7 +199,6 @@ having count(e.e_id) between 0 and 3
 
 
 -- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021
-drop database furama_resort;
 
 -- C1 ----------------------
 
@@ -231,28 +228,17 @@ where year(contract_day) between 2019 and 2021
 );
 set sql_safe_updates = 1;
 
--- ------------------------------------
-create view temp_view as
-select e.e_id
-from employee e left join contract co using(e_id)
-where co.e_id is null;
-
-delete from employee
-where e_id in (select tv.e_id from temp_view tv);
-
-select tv.e_id from temp_view tv;
-drop temporary table if exists temp_id_e;
 
 -- 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond,
 -- chỉ cập nhật những khách hàng đã từng đặt phòng với 
 -- Tổng Tiền thanh toán trong năm 2021 là lớn hơn 10.000.000 VNĐ.
-set sql_safe_updates = 0;
 
+set sql_safe_updates = 0;
 update customer
 set tc_id = 1
 where c_id in 
 (
-select c_id 
+select c_id
 from (
 select c.c_id
 from customer c join type_customer tc using(tc_id)
@@ -264,17 +250,82 @@ where tc.tc_type = 'Platinum' and year(co.contract_day) = 2021
 group by c.c_id)
 as temp_table
 );
-
 set sql_safe_updates = 1;
 
+-- create temporary table temp as
+-- select c.c_id
+-- from customer c join type_customer tc using(tc_id)
+-- join contract co using(c_id)
+-- join service s using(s_id)
+-- left join contract_detail cd on co.id = cd.contract_id
+-- left join service_included si using(si_id)
+-- where tc.tc_type = 'Platinum' and year(co.contract_day) = 2021
+-- group by c.c_id;
+
+-- drop temporary table if exists temp_table
 
 
 -- 18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).
 
+create temporary table temp_table as
+select c_id
+from contract
+where year(contract_day) < 2021;
+
+delete cd
+from contract_detail cd join contract co on co.id = cd.contract_id
+where co.c_id in
+(
+select c_id
+from temp_table
+);
+
+delete from contract
+where c_id in
+(
+select c_id
+from temp_table
+);
+
+delete from customer
+where c_id in
+(
+select c_id
+from temp_table
+);
+drop temporary table if exists temp_table;
 
 -- 19.	Cập nhật giá cho các dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2020 lên gấp đôi.
 
--- 20.	Hiển thị thông tin của tất cả các nhân viên và khách hàng có trong hệ thống, thông tin hiển thị bao gồm id (ma_nhan_vien, ma_khach_hang), ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi.
+set sql_safe_updates = 0;
+
+update service_included
+set si_price = si_price*2
+where si_id in (
+select cd.si_id
+from contract_detail cd join contract co on cd.contract_id = co.id
+where year(co.contract_day) = 2020
+group by cd.si_id
+having sum(cd.cd_quantity) > 10
+);
+
+set sql_safe_updates = 1;
+
+-- 20.	Hiển thị thông tin của tất cả các nhân viên và khách hàng có trong hệ thống, thông tin hiển thị bao gồm
+--  id (ma_nhan_vien, ma_khach_hang), ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi.
+
+   select e_id, e_name, e_email, e_phonenumber, e_dob, e_address
+   from employee
+   union all
+	select c_id, c_name, c_email, c_phonenumber, c_dob, c_address
+   from customer;
+   
+   select e_id as ID, e_name as `NAM`, e_email as EMAIL, e_phonenumber as PHONE, e_dob as DAYOFBIRTH, e_address as ADDRESS
+   from employee
+   union all
+	select c_id, c_name, c_email, c_phonenumber, c_dob, c_address
+   from customer
+   
 
    
    

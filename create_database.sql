@@ -1,5 +1,5 @@
-create database furama_16;
-use furama_16;
+create database furama_resort;
+use furama_resort;
 
 -- Bảng vi_tri lưu trữ thông tin vị trí làm tại resort của nhân viên.
 create table position_employee(
@@ -207,43 +207,5 @@ values
 insert into contract_detail(cd_quantity, contract_id, si_id)
 values(5,2,4),(8,2,5),(15,2,6),(1,3,1),(11,3,2),(1,1,3),(2,1,2),(2,12,2);
 
--- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021
-
--- C1 ----------------------
-create temporary table temp_id_e as
-select e.e_id
-from employee e left join contract co using(e_id)
-where co.e_id is null;
-
-delete from employee 
-where e_id in
- (
-select e_id
-from temp_id_e
-);
-
-drop temporary table if exists temp_id_e;
-
--- C2---------------------
-set sql_safe_updates = 1;
-delete from employee 
-where e_id not in (3,7,10,2);
- (
-select  e_id
-from contract
-where year(contract_day) between 2019 and 2021
-);
-
-
-drop database furama_16;
-
--- 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond, 
--- chỉ cập nhật những khách hàng đã từng đặt phòng với Tổng Tiền thanh toán trong năm 2021 là lớn hơn 10.000.000 VNĐ.
-
--- 18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).
-
--- 19.	Cập nhật giá cho các dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2020 lên gấp đôi.
-
--- 20.	Hiển thị thông tin của tất cả các nhân viên và khách hàng có trong hệ thống, thông tin hiển thị bao gồm id (ma_nhan_vien, ma_khach_hang), ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi.
 
    
