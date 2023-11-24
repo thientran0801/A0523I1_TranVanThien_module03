@@ -68,16 +68,63 @@ insert into instructor(`name`,birthday, salary)
 
 
 
--- 1. Lấy ra thông tin các học viên, và cho biết các học viên đang theo học lớp nào.
--- 2. Lấy ra thông tin các học viên, và cho biết các học viên đang theo học lớp nào và cả các bạn đã đăng ký nhưng chưa có lớp học.
+-- 1. Lấy ra thông tin các học viên, 
+-- và cho biết các học viên đang theo học lớp nào.
+-- Student + Class
+
+select s.*, c.name as "class_name"
+from student s
+inner join class c on s.class_id = c.id;
+
+
+-- 2. Lấy ra thông tin các học viên, và cho biết 
+-- các học viên đang theo học lớp nào 
+-- và cả các bạn đã đăng ký nhưng chưa có lớp học.
+select s.*, c.name as "class_name"
+from student s
+left join class c on s.class_id = c.id;
+
 -- 3. Lấy thông tin của các học viên tên “Hai” và 'Huynh’.
+
+select * 
+from student
+where name like '% Hai' or name like '% Huynh';
+
 -- 4. Lấy ra học viên có điểm lớn hơn 5.
+
+select *
+from student
+where point > 5;
+
 -- 5. Lấy ra học viên có họ là “nguyen”
+
+select *
+from student
+where name like 'nguyen %';
+
 -- 6. Thông kế số lượng học sinh theo từng loại điểm.
--- 7. Thông kế số lượng học sinh theo điểm lớn hơn 5 và chỉ hiện thị với số lượng>=2
--- 8. Lấy ra danh sách học viên của lớp c1121g1 và sắp xếp tên học viên theo alphabet.
 
+select point, count(point) as 'quanlity'
+from student
+group by point;
 
+-- 7. Thông kế số lượng học sinh theo điểm lớn hơn 5 
+-- và chỉ hiện thị với số lượng >= 2
+
+select point, count(point) as 'quanlity'
+from student
+where point > 5
+group by point
+having quanlity >=2;
+
+-- 8. Lấy ra danh sách học viên của lớp 
+-- c1121g1 và sắp xếp tên học viên theo alphabet.
+
+select student.name, class.name
+from student
+join class on student.class_id = class.id
+where class.name = 'c1121g1'
+order by student.name desc;
 
 
 
