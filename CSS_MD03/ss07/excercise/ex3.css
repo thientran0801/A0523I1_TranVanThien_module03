@@ -20,33 +20,37 @@ ul {
 #head-link {
     width: 100%;
     background: lightpink;
-    min-height: 80px;
-    margin: 0;
-    clear: both;
-    text-align: center;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#head-link ul li {
-    display: block;
-    width: 200px;
-    float: left;
-    border-right: 1px solid black;
-    color: black;
-    line-height: 50px;
-    padding-left: 10px;
-    padding-right: 10px;
+#head-link li {
     text-align: center;
+    width: 250px;
+    list-style: none;
+    display: block;
+    float: left;
+    border-right: 2px solid black;
+    font-weight: bold;
+
 }
 #left {
+    text-align: center;
     width: 30%;
     background: greenyellow;
-    min-height: 500px;
+    min-height: 700px;
     float: left;
+    padding: 10px;
 }
-
+* {
+    box-sizing: border-box;
+}
 #content {
     width: 70%;
     background: peru;
-    min-height: 500px;
+    min-height: 700px;
     float: left;
+    padding: 10px;
 }
