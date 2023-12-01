@@ -1,0 +1,11 @@
+* {
+    box-sizing: border-box;
+}
+#shop-deals {
+border: 1px solid;
+    border-radius: 5px;
+    margin-left: 15px;
+}
+#shop-deals:hover {
+    text-decoration: underline;
+}

@@ -13,11 +13,11 @@ public class Customerservlet extends HttpServlet {
 
     private static final List<Customer> CUSTOMER_LIST = new ArrayList<>();
     static {
-        CUSTOMER_LIST.add(new Customer("Mai Văn Hoàn", "1983-08-20", "Hà Nội","https://james.codegym.vn/pluginfile.php/58515/mod_assign/intro/1.png"));
-        CUSTOMER_LIST.add(new Customer("Nguyễn Văn Nam", "1983-08-21", "Bắc Giang","https://james.codegym.vn/pluginfile.php/58515/mod_assign/intro/1.png"));
-        CUSTOMER_LIST.add(new Customer("Nguyễn Thái Hòa", "1983-08-22", "Nam Định","https://james.codegym.vn/pluginfile.php/58515/mod_assign/intro/1.png"));
-        CUSTOMER_LIST.add(new Customer("Trần Đăng Khoa", "1983-08-17", "Hà Tây","https://james.codegym.vn/pluginfile.php/58515/mod_assign/intro/1.png"));
-        CUSTOMER_LIST.add(new Customer("Nguyễn Đình Thi", "1983-08-19", "Hà Nội","https://james.codegym.vn/pluginfile.php/58515/mod_assign/intro/1.png"));
+        CUSTOMER_LIST.add(new Customer("Mai Văn Hoàn", "1983-08-20", "Hà Nội","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0xbl2Vwjca_WRVfnF86mg_khbEWbKJM52PQ&usqp=CAU"));
+        CUSTOMER_LIST.add(new Customer("Nguyễn Văn Nam", "1983-08-21", "Bắc Giang","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0xbl2Vwjca_WRVfnF86mg_khbEWbKJM52PQ&usqp=CAU"));
+        CUSTOMER_LIST.add(new Customer("Nguyễn Thái Hòa", "1983-08-22", "Nam Định","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0xbl2Vwjca_WRVfnF86mg_khbEWbKJM52PQ&usqp=CAU"));
+        CUSTOMER_LIST.add(new Customer("Trần Đăng Khoa", "1983-08-17", "Hà Tây","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0xbl2Vwjca_WRVfnF86mg_khbEWbKJM52PQ&usqp=CAU"));
+        CUSTOMER_LIST.add(new Customer("Nguyễn Đình Thi", "1983-08-19", "Hà Nội","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0xbl2Vwjca_WRVfnF86mg_khbEWbKJM52PQ&usqp=CAU"));
     }
 
     @Override
