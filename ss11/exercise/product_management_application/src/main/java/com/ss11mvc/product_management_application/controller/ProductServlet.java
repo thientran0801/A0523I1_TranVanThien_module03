@@ -74,19 +74,19 @@ public class ProductServlet extends HttpServlet {
     private void showFormUpdate(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         Product product = productService.findById(id);
-        request.setAttribute("product", product);
         RequestDispatcher dispatcher;
         if (product == null) {
             dispatcher = request.getRequestDispatcher("product/error.jsp");
         } else {
+            request.setAttribute("product", product);
             dispatcher = request.getRequestDispatcher("product/update.jsp");
-            try {
-                dispatcher.forward(request, response);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        }
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
