@@ -13,19 +13,18 @@
         background: red;
     }
     td {
-        background: lightgrey;
-    }
+        background: lightgrey;    }
 </style>
 <body>
-<%--<%!--%>
-<%--    private String formatCurrency(double amount) {--%>
-<%--        // Tạo một đối tượng NumberFormat để định dạng số tiền theo Locale.DEFAULT--%>
-<%--        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.getDefault());--%>
+<%--<%!
+    private String formatCurrency(double amount) {
+        // Tạo một đối tượng NumberFormat để định dạng số tiền theo Locale.DEFAULT
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.getDefault());
 
-<%--        // Định dạng số tiền và trả về kết quả dưới dạng chuỗi--%>
-<%--        return currencyFormatter.format(amount);--%>
-<%--    }--%>
-<%--%>--%>
+        // Định dạng số tiền và trả về kết quả dưới dạng chuỗi
+        return currencyFormatter.format(amount);
+    }
+%>--%>
 <h1>product</h1>
 <p>
     <a href="/product?action=create">Create new product</a>

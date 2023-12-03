@@ -4,6 +4,7 @@ import com.ss11mvc.product_management_application.model.Product;
 import com.ss11mvc.product_management_application.repository.IProductRepository;
 import com.ss11mvc.product_management_application.repository.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService implements IProductService {
@@ -32,13 +33,14 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> findByName(String keyword) {
         List<Product> productList = iProductRepository.showList();
+        List<Product> products = new ArrayList<>();
         for (Product p : productList) {
             String name = p.getName().toLowerCase();
-            if (!name.contains(keyword.toLowerCase())) {
-                productList.remove(p);
+            if (name.contains(keyword.toLowerCase())) {
+                products.add(p);
             }
         }
-        return productList;
+        return products;
     }
 
     @Override

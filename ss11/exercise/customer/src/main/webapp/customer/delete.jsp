@@ -10,7 +10,7 @@
     <a href="/customers">Back to customer list</a>
 </p>
 
-<form action="/customer">
+<form method="post">
     <h3>Are you sure?</h3>
     <fieldset>
         <legend>Customer information</legend>

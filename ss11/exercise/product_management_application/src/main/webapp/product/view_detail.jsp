@@ -1,5 +1,5 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><!DOCTYPE html>
 <html>
 <head>
     <title>Title</title>
@@ -22,19 +22,19 @@
 <table>
     <tr>
         <td width="150px">Name:</td>
-        <td>${requestScope["product"].getName()}</td>
+        <td>${product.getName()}</td>
     </tr>
     <tr>
         <td>Price:</td>
-        <td>${requestScope["product"].getPrice()}</td>
+        <td>${product.getPrice()}</td>
     </tr>
     <tr>
         <td>Description: </td>
-        <td>${requestScope["product"].getDescription()}</td>
+        <td>${product.getDescription()}</td>
     </tr>
     <tr>
         <td>Producer: </td>
-        <td>${requestScope["product"].getProducer()}</td>
+        <td>${product.getProducer()}</td>
     </tr>
 </table>
 </body>
