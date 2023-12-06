@@ -1,7 +1,7 @@
-package com.example.usermanager.controller;
+package com.codegym.usermanager.controller;
 
-import com.example.usermanager.dao.UserDAO;
-import com.example.usermanager.model.User;
+import com.codegym.usermanager.dao.UserDAO;
+import com.codegym.usermanager.model.User;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: HP
-  Date: 12/4/2023
-  Time: 9:03 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -26,13 +20,13 @@
         </h2>
       </caption>
       <c:if test="${user != null}">
-        <input type="hidden" name="id" value="<c:out value='${user.id}' />"/>
+        <input type="hidden" name="id" value="${user.id}"/>
       </c:if>
       <tr>
-        <th>User Name:</th>
+        <th>User Name:</th>z
         <td>
           <input type="text" name="name" size="45"
-                 value="<c:out value='${user.name}' />"
+                 value="${user.name}"
           />
         </td>
       </tr>
@@ -40,7 +34,7 @@
         <th>User Email:</th>
         <td>
           <input type="text" name="email" size="45"
-                 value="<c:out value='${user.email}' />"
+                 value="${user.email}"
           />
         </td>
       </tr>
@@ -48,7 +42,7 @@
         <th>Country:</th>
         <td>
           <input type="text" name="country" size="15"
-                 value="<c:out value='${user.country}' />"
+                 value="${user.country}"
           />
         </td>
       </tr>

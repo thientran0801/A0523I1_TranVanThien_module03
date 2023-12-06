@@ -3,7 +3,7 @@ plugins {
     id 'war'
 }
 
-group 'com.example'
+group 'com.module3'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -23,9 +23,9 @@ tasks.withType(JavaCompile) {
 
 dependencies {
     compileOnly('jakarta.servlet:jakarta.servlet-api:5.0.0')
-    compileJava.options.encoding = 'UTF-8'
-    tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
     implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
+    compileJava.options.encoding = 'UTF-8'
+    tasks.withType(JavaCompile) {    options.encoding = 'UTF-8'}
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.23'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")

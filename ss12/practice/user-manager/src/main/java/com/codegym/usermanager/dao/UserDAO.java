@@ -1,6 +1,6 @@
-package com.example.usermanager.dao;
+package com.codegym.usermanager.dao;
 
-import com.example.usermanager.model.User;
+import com.codegym.usermanager.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 public class UserDAO implements IUserDAO {
     private String jdbcURL = "jdbc:mysql://localhost:3306/demo?useSSL=false";
     private String jdbcUsername = "root";
-    private String jdbcPassword = "123456";
+    private String jdbcPassword = "Thien0801*";
 
     private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (name, email, country) VALUES " +
             " (?, ?, ?);";

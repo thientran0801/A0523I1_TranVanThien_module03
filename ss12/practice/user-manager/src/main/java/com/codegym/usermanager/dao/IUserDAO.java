@@ -1,6 +1,6 @@
-package com.example.usermanager.dao;
+package com.codegym.usermanager.dao;
 
-import com.example.usermanager.model.User;
+import com.codegym.usermanager.model.User;
 
 import java.sql.SQLException;
 import java.util.List;
