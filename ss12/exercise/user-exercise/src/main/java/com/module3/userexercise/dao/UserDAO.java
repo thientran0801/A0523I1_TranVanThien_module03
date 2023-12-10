@@ -16,8 +16,8 @@ public class UserDAO implements IUserDAO {
     private static final String SELECT_USER_BY_ID = "select id,name,email,country from users where id = ?;";
     private static final String SELECT_ALL_USERS = "select * from users;";
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
-    private static final String UPDATE_USERS_SQL = "update users set name = '?', email = '?', country = '?' where id = ?;";
-    private static final String SELECT_USER_BY_COUNTRY = "select id, name, email, country from users where country like '%?%';";
+    private static final String UPDATE_USERS_SQL = "update users set name = ?, email = ?, country = ? where id = ?;";
+    private static final String SELECT_USER_BY_COUNTRY = "select id, name, email, country from users where country like ?;";
     private static final String SORT_BY_NAME = "select * from users order by name asc;";
 
     public UserDAO() {
@@ -123,7 +123,7 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public boolean update(User user) {
-        boolean rowUpdate = false;
+        boolean rowUpdate;
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USERS_SQL)) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getEmail());
@@ -133,7 +133,7 @@ public class UserDAO implements IUserDAO {
         } catch (SQLException e) {
             printSQLException(e);
         }
-        return rowUpdate;
+        return false;
     }
 
     @Override
@@ -141,7 +141,7 @@ public class UserDAO implements IUserDAO {
         List<User> userList = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_COUNTRY)) {
-            preparedStatement.setString(1, countryFind);
+            preparedStatement.setString(1, "%" + countryFind + "%");
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
 
