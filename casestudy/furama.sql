@@ -1,5 +1,5 @@
-create database furama_resort;
-use furama_resort;
+create database furama;
+use furama;
 
 create table service_type(
 service_type_id int primary key auto_increment,
@@ -13,7 +13,7 @@ rent_type_cost double
 );
 
 create table service(
-service_id int primary key auto_increment,
+service_id varchar(45) primary key,
 service_name varchar(45) not null,
 service_area double,
 service_cost double not null,
@@ -37,7 +37,7 @@ customer_type_name varchar(45)
 );
 
 create table customer(
-customer_id int primary key auto_increment,
+customer_id varchar(45) primary key,
 customer_name varchar(45) not null,
 customer_birthday date not null,
 customer_gender bit(1) not null,
@@ -49,10 +49,6 @@ customer_address varchar(45),
 customer_type_id int not null,
 foreign key(customer_type_id) references customer_type(customer_type_id)
 );
-
-
-
--- customer
 
 create table `position`(
 positione_id int primary key auto_increment,
@@ -87,9 +83,8 @@ foreign key(role_id) references `role`(role_id),
 foreign key(username) references `user`(username)
 );
 
-
 create table employee(
-employee_id int primary key auto_increment,
+employee_id varchar(45) primary key,
 employee_name varchar(45) not null,
 employee_birthday date not null,
 -- employee_gender bit(1) not null,
