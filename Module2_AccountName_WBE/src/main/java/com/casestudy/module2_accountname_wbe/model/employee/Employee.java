@@ -1,7 +1,7 @@
 package com.casestudy.module2_accountname_wbe.model.employee;
 
 public class Employee {
-    private String id;
+    private int id;
     private String name;
     private String birthday;
     private String idCard;
@@ -9,12 +9,12 @@ public class Employee {
     private String phone;
     private String email;
     private String address;
-    private Position position;
-    private EducationDegree educationDegree;
-    private Division division;
-    private User user;
+    private int position;
+    private int educationDegree;
+    private int division;
+    private String user;
 
-    public Employee(String name, String birthday, String idCard, double salary, String phone, String email, String address, Position position, EducationDegree educationDegree, Division division, User user) {
+    public Employee(String name, String birthday, String idCard, double salary, String phone, String email, String address, int position, int educationDegree, int division, String user) {
         this.name = name;
         this.birthday = birthday;
         this.idCard = idCard;
@@ -28,7 +28,7 @@ public class Employee {
         this.user = user;
     }
 
-    public Employee(String id, String name, String birthday, String idCard, double salary, String phone, String email, String address, Position position, EducationDegree educationDegree, Division division, User user) {
+    public Employee(int id, String name, String birthday, String idCard, double salary, String phone, String email, String address, int position, int educationDegree, int division, String user) {
         this.id = id;
         this.name = name;
         this.birthday = birthday;
@@ -43,11 +43,11 @@ public class Employee {
         this.user = user;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -107,35 +107,35 @@ public class Employee {
         this.address = address;
     }
 
-    public Position getPosition() {
+    public int getPosition() {
         return position;
     }
 
-    public void setPosition(Position position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 
-    public EducationDegree getEducationDegree() {
+    public int getEducationDegree() {
         return educationDegree;
     }
 
-    public void setEducationDegree(EducationDegree educationDegree) {
+    public void setEducationDegree(int educationDegree) {
         this.educationDegree = educationDegree;
     }
 
-    public Division getDivision() {
+    public int getDivision() {
         return division;
     }
 
-    public void setDivision(Division division) {
+    public void setDivision(int division) {
         this.division = division;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
     }
 }

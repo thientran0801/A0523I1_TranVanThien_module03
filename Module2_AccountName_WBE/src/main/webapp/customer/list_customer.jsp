@@ -1,12 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: HP
-  Date: 12/11/2023
-  Time: 8:02 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>Customer</title>
@@ -16,9 +10,19 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
           crossorigin="anonymous">
 </head>
-<body>
+<body style="padding: 10px">
 <h1 align="center">Customer Infomation table</h1>
 <hr>
+<a href="/furama?action=createCustomer" style="text-align:right;">Create new customer</a>
+<hr>
+<form action="/furama?action=findCustomerByName" method="post">
+    <table>
+        <tr>
+            <td><input type="text" name="kw" placeholder="Search"></td>
+            <td><input type="submit" value="Search"></td>
+        </tr>
+    </table>
+</form>
 <table class="table">
     <thead>
     <tr>
@@ -37,17 +41,24 @@
     <tbody>
     <c:forEach items="${list}" var="c" varStatus="loop">
         <tr>
-            <td>${loop.count}</td>
+<%--            <td>${loop.count}</td>--%>
+            <td>${String.format("KH-%04d", c.id)}</td>
             <td>${c.name}</td>
             <td>${c.birthday}</td>
-            <td>${c.gender}</td>
+<%--            <c:if test="${c.gender == true}">
+                <td>Nam</td>
+            </c:if>
+            <c:if test="${c.gender == false}">
+                <td>Nữ</td>
+            </c:if>--%>
+            <td>${c.gender ? "Nam" : "Nư"}</td>
             <td>${c.idCard}</td>
             <td>${c.phone}</td>
             <td>${c.email}</td>
             <td>${c.address}</td>
             <td>${c.customerType.customerType}</td>
-            <td><button type="button" class="btn btn-danger"><a href="/furama?action=update&id=${c.id}">Delete</a></button></td>
-            <td><button type="button" class="btn btn-warning"><a href="/furama?action=delete&id=${c.id}">Edit</a></button></td>
+            <td><button type="button" class="btn btn-warning"><a href="/furama?action=editCustomer&id=${c.id}">Edit</a></button></td>
+            <td><button type="button" class="btn btn-danger"><a href="/furama?action=deleteCustomer&id=${c.id}">Delete</a></button></td>
         </tr>
     </c:forEach>
     </tbody>

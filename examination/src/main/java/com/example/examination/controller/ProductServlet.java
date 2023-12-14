@@ -2,6 +2,7 @@ package com.example.examination.controller;
 
 import com.example.examination.model.Category;
 import com.example.examination.model.Product;
+import com.example.examination.model.Product1;
 import com.example.examination.model.ProductDTO;
 import com.example.examination.repository.cateogry.CategoryRepository;
 import com.example.examination.repository.cateogry.ICategoryRepository;

@@ -5,13 +5,13 @@ public class CustomerDTO {
     private String customerType;
     private String name;
     private String birthday;
-    private String gender;
+    private boolean gender;
     private String idCard;
     private String phone;
     private String email;
     private String address;
 
-    public CustomerDTO(String id, String customerType, String name, String birthday, String gender, String idCard, String phone, String email, String address) {
+    public CustomerDTO(String id, String customerType, String name, String birthday, boolean gender, String idCard, String phone, String email, String address) {
         this.id = id;
         this.customerType = customerType;
         this.name = name;
@@ -55,11 +55,11 @@ public class CustomerDTO {
         this.birthday = birthday;
     }
 
-    public String getGender() {
+    public boolean getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(boolean gender) {
         this.gender = gender;
     }
 

@@ -1,6 +1,9 @@
-package com.casestudy.module2_accountname_wbe.repository;
+package com.casestudy.module2_accountname_wbe.repository.customer;
 
 import com.casestudy.module2_accountname_wbe.model.customer.CustomerType;
+import com.casestudy.module2_accountname_wbe.repository.BaseRepository;
+import com.casestudy.module2_accountname_wbe.repository.IRepositorySub;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,10 +51,5 @@ public class CustomerTypeRepository implements IRepositorySub<CustomerType> {
             e.printStackTrace();
         }
         return customerType;
-    }
-
-    public static void main(String[] args) {
-        CustomerTypeRepository customerTypeRepository = new CustomerTypeRepository();
-        System.out.println(customerTypeRepository.findById(2).getCustomerType());
     }
 }

@@ -67,13 +67,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Employee</a>
+                    <a class="nav-link active" aria-current="page" href="/furama?action=listEmployee">Employee</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/furama?action=lisCustomer">Customer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Service</a>
+                    <a class="nav-link active" aria-current="page" href="/furama?action=listService">Service</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Contract</a>

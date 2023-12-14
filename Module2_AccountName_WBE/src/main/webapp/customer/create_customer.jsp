@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -6,7 +7,6 @@
       rel="stylesheet"
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous">--%>
-
 <html>
 <head>
     <title>Create Customer</title>
@@ -15,7 +15,6 @@
     input {
         width: 500px;
     }
-
     label input {
         width: auto;
     }
@@ -23,49 +22,44 @@
 <body style="background: lightblue;">
 
 
-<h1>Edit Customer</h1>
+<h1>Create new Customer</h1>
 <hr>
-<form action="/furama?action=editCustomer&id=${customer.id}" method="post">
+<form action="/furama?action=createCustomer" method="post">
     <table>
+<%--        <tr>
+            <td>ID:</td>
+            <td><input type="text" name="id"></td>
+        </tr>--%>
         <tr>
             <td>Name:</td>
-            <td><input type="text" name="name" value="${customer.name}"></td>
+            <td><input type="text" name="name"></td>
         </tr>
         <tr>
             <td>Birthday:</td>
-            <td><input type=" text" name="dob" value="${customer.birthday}">
-            </td>
+            <td><input type="text" name="dob"></td>
         </tr>
         <tr>
             <td>Gender:</td>
-            <c:if test="${customer.gender == true}">
-                <td>
-                    <label><input width="100px" type="radio" name="gender" value="true" checked>Nam</label>
-                    <label><input width="100px " type="radio" name="gender" value="false">Nữ</label>
-                </td>
-            </c:if>
-            <c:if test="${customer.gender == false}">
-                <td>
-                    <label><input width="100px" type="radio" name="gender" value="true">Nam</label>
-                    <label><input width="100px " type="radio" name="gender" value="false" checked>Nữ</label>
-                </td>
-            </c:if>
+            <td>
+                <label><input width="100px" type="radio" name="gender" value="true" checked>Nam</label>
+                <label><input width="100px " type="radio" name="gender" value="false">Nữ</label>
+            </td>
         </tr>
         <tr>
             <td>ID card:</td>
-            <td><input type="text" name="idcard" value="${customer.idCard}"></td>
+            <td><input type="text" name="idcard"></td>
         </tr>
         <tr>
             <td>Phone:</td>
-            <td><input type="text" name="phone" value="${customer.phone}"></td>
+            <td><input type="text" name="phone"></td>
         </tr>
         <tr>
             <td>Address:</td>
-            <td><input type="text" name="address" value="${customer.address}"></td>
+            <td><input type="text" name="address"></td>
         </tr>
         <tr>
             <td>Email:</td>
-            <td><input type="text" name="email" value="${customer.email}"></td>
+            <td><input type="text" name="email"></td>
         </tr>
         <tr>
             <td>Customer type:</td>

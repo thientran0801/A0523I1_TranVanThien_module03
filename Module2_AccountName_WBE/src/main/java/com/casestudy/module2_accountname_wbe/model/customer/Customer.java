@@ -1,17 +1,17 @@
 package com.casestudy.module2_accountname_wbe.model.customer;
 
 public class Customer {
-    private String id;
+    private int id;
     private CustomerType customerType;
     private String name;
     private String birthday;
-    private String gender;
+    private boolean gender;
     private String idCard;
     private String phone;
     private String email;
     private String address;
 
-    public Customer(CustomerType customerType, String name, String birthday, String gender, String idCard, String phone, String email, String address) {
+    public Customer(CustomerType customerType, String name, String birthday, boolean gender, String idCard, String phone, String email, String address) {
         this.customerType = customerType;
         this.name = name;
         this.birthday = birthday;
@@ -22,7 +22,7 @@ public class Customer {
         this.address = address;
     }
 
-    public Customer(String id, CustomerType customerType, String name, String birthday, String gender, String idCard, String phone, String email, String address) {
+    public Customer(int id, CustomerType customerType, String name, String birthday, boolean gender, String idCard, String phone, String email, String address) {
         this.id = id;
         this.customerType = customerType;
         this.name = name;
@@ -34,11 +34,11 @@ public class Customer {
         this.address = address;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -66,11 +66,11 @@ public class Customer {
         this.birthday = birthday;
     }
 
-    public String getGender() {
+    public boolean getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(boolean gender) {
         this.gender = gender;
     }
 

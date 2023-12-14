@@ -1,7 +1,7 @@
 package com.casestudy.module2_accountname_wbe.model.service;
 
 public class Service {
-    private String id;
+    private int id;
     private String name;
     private int area;
     private double cost;
@@ -13,7 +13,7 @@ public class Service {
     private RentType rentType;
     private ServiceType serviceType;
 
-    public Service(String id, String name, int area, double cost, int maxPeople, String standardRoom, String description, double areaPool, int floor, RentType rentType, ServiceType serviceType) {
+    public Service(int id, String name, int area, double cost, int maxPeople, String standardRoom, String description, double areaPool, int floor, RentType rentType, ServiceType serviceType) {
         this.id = id;
         this.name = name;
         this.area = area;
@@ -40,11 +40,11 @@ public class Service {
         this.serviceType = serviceType;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
