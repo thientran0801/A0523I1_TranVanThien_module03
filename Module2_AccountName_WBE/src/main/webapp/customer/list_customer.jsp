@@ -45,13 +45,7 @@
             <td>${String.format("KH-%04d", c.id)}</td>
             <td>${c.name}</td>
             <td>${c.birthday}</td>
-<%--            <c:if test="${c.gender == true}">
-                <td>Nam</td>
-            </c:if>
-            <c:if test="${c.gender == false}">
-                <td>Nữ</td>
-            </c:if>--%>
-            <td>${c.gender ? "Nam" : "Nư"}</td>
+            <td>${c.gender ? "Nam" : "Nữ"}</td>
             <td>${c.idCard}</td>
             <td>${c.phone}</td>
             <td>${c.email}</td>

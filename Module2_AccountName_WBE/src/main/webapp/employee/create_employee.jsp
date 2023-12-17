@@ -28,31 +28,31 @@
   <table>
     <tr>
       <td>Name:</td>
-      <td><input type="text" name="name"></td>
+      <td><input type="text" name="name" required></td>
     </tr>
     <tr>
       <td>Birthday:</td>
-      <td><input type="date" name="dob"></td>
+      <td><input type="date" name="dob" required></td>
     </tr>
     <tr>
       <td>ID card:</td>
-      <td><input type="text" name="idcard"></td>
+      <td><input type="text" name="idcard" required></td>
     </tr>
     <tr>
       <td>Salary:</td>
-      <td><input type="number" name="salary"></td>
+      <td><input type="number" name="salary" required></td>
     </tr>
     <tr>
       <td>Phone:</td>
-      <td><input type="text" name="phone"></td>
+      <td><input type="text" name="phone" required></td>
     </tr>
     <tr>
       <td>Address:</td>
-      <td><input type="text" name="address"></td>
+      <td><input type="text" name="address" required></td>
     </tr>
     <tr>
       <td>Email:</td>
-      <td><input type="text" name="email"></td>
+      <td><input type="text" name="email" required></td>
     </tr>
     <tr>
       <td>Position:</td>
@@ -89,11 +89,11 @@
   <table>
     <tr>
       <td>User name:</td>
-      <td><input type="text" name="userName"></td>
+      <td><input type="text" name="userName" required></td>
     </tr>
     <tr>
       <td>Password:</td>
-      <td><input type="password" name="password"></td>
+      <td><input type="password" name="password" required></td>
     </tr>
   </table>
   <hr>

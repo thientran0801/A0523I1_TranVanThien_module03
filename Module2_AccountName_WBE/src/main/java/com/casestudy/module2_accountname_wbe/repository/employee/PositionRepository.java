@@ -23,8 +23,9 @@ public class PositionRepository implements IRepositorySub<Position> {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt("positione_id");
+                int id = resultSet.getInt("position_id");
                 String position_name = resultSet.getString("position_name");
+
                 Position position = new Position(id, position_name);
                 list.add(position);
             }

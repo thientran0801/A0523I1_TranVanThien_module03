@@ -63,26 +63,70 @@ public class FuramaServlet extends HttpServlet {
                 showListService(request, response);
                 break;
 
-                // employee
+            // employee
             case "createEmployee":
                 showFormCreateEmployee(request, response);
                 break;
             case "listEmployee":
                 listEmployee(request, response);
                 break;
+            case "editEmployee":
+                showFormEditEmployee(request, response);
+                break;
+            case "deleteEmployee":
+                showFormDeleteEmployee(request, response);
+                break;
         }
     }
 
-    private void listEmployee(HttpServletRequest request, HttpServletResponse response) {
-        List<Employee> list = employeeRepository.showList();
-        request.setAttribute("list" , list);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("employee/list_employee.jsp");
+    private void showFormDeleteEmployee(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Employee employee = employeeRepository.findById(id);
+        request.setAttribute("employee", employee);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("employee/delete_employee.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
            e.printStackTrace();
+        }
+    }
+
+    private void showFormEditEmployee(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        Employee employee = employeeRepository.findById(id);
+        List<Position> positions = positionRepository.showList();
+        List<EducationDegree> educationDegrees = educationDegreeRepository.showList();
+        List<Division> divisions = divisionRepository.showList();
+
+        request.setAttribute("positions", positions);
+        request.setAttribute("educationDegrees", educationDegrees);
+        request.setAttribute("divisions", divisions);
+        request.setAttribute("employee", employee);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("employee/edit_employee.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void listEmployee(HttpServletRequest request, HttpServletResponse response) {
+        List<EmployeeDTO> list = employeeRepository.showListDTO();
+        request.setAttribute("list", list);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("employee/list_employee.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -101,7 +145,7 @@ public class FuramaServlet extends HttpServlet {
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -184,6 +228,7 @@ public class FuramaServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -206,9 +251,68 @@ public class FuramaServlet extends HttpServlet {
             case "createService":
                 createService(request, response);
                 break;
-                //EMPLOYEE
+            //EMPLOYEE
             case "createEmployee":
                 createEmployee(request, response);
+                break;
+            case "editEmployee":
+                editEmployee(request, response);
+                break;
+            case "deleteEmployee":
+                deleteEmployee(request, response);
+                break;
+            case "findEmployeeByName":
+                findEmployeeByName(request, response);
+        }
+    }
+
+    private void findEmployeeByName(HttpServletRequest request, HttpServletResponse response) {
+        String kw = request.getParameter("kw");
+        List<EmployeeDTO> list = employeeRepository.findByName(kw);
+        request.setAttribute("list", list);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("employee/list_employee.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+           e.printStackTrace();
+        }
+    }
+
+    private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        employeeRepository.delete(id);
+        try {
+            response.sendRedirect("furama?action=listEmployee");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void editEmployee(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String dob = request.getParameter("dob");
+        String idcard = request.getParameter("idcard");
+        double salary = Double.parseDouble(request.getParameter("salary"));
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        int position = Integer.parseInt(request.getParameter("position"));
+        int educationDegree = Integer.parseInt(request.getParameter("educationDegree"));
+        int division = Integer.parseInt(request.getParameter("division"));
+        String userName = request.getParameter("userName");
+
+        Employee employee = new Employee(id, name, dob, idcard, salary, phone, email, address, position, educationDegree, division, userName);
+        employeeRepository.edit(employee);
+
+        try {
+            response.sendRedirect("/furama?action=listEmployee");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -228,7 +332,7 @@ public class FuramaServlet extends HttpServlet {
 
         User user = new User(userName, password);
         userRepository.addUser(user);
-        Employee employee = new Employee(name, dob, idcard, salary, phone, email, address, position, educationDegree, division, userName );
+        Employee employee = new Employee(name, dob, idcard, salary, phone, email, address, position, educationDegree, division, userName);
         employeeRepository.add(employee);
 
         try {

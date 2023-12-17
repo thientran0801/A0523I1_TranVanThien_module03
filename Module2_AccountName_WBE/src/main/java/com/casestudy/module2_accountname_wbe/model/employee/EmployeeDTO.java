@@ -1,7 +1,7 @@
 package com.casestudy.module2_accountname_wbe.model.employee;
 
 public class EmployeeDTO {
-    private String id;
+    private int id;
     private String name;
     private String birthday;
     private String idCard;
@@ -14,7 +14,7 @@ public class EmployeeDTO {
     private String division;
     private String user;
 
-    public EmployeeDTO(String id, String name, String birthday, String idCard, double salary, String phone, String email, String address, String position, String educationDegree, String division, String user) {
+    public EmployeeDTO(int id, String name, String birthday, String idCard, double salary, String phone, String email, String address, String position, String educationDegree, String division, String user) {
         this.id = id;
         this.name = name;
         this.birthday = birthday;
@@ -29,11 +29,11 @@ public class EmployeeDTO {
         this.user = user;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

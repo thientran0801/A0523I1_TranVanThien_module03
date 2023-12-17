@@ -6,6 +6,7 @@
       rel="stylesheet"
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous">--%>
+
 <html>
 <head>
     <title>Create Customer</title>
@@ -22,55 +23,57 @@
 <body style="background: lightblue;">
 
 
-<h1>Create new Customer</h1>
+<h1>Edit Customer</h1>
 <hr>
-<form action="/furama?action=createCustomer" method="post">
+<form action="/CustomerServlet?action=editCustomer&id=${customer.id}" method="post">
     <table>
-        <%--        <tr>
-                    <td>ID:</td>
-                    <td><input type="text" name="id"></td>
-                </tr>--%>
         <tr>
             <td>Name:</td>
-            <td><input type="text" name="name" required></td>
-        </tr>`
-        <tr>
-            <td>Birthday:</td>
-            <td><input type="date" name="dob" required></td>
+            <td><input type="text" name="name" value="${customer.name}"></td>
         </tr>
         <tr>
-            <td>Gender:</td>
-            <td>
-                <label><input width="100px" type="radio" name="gender" value="true" checked>Nam</label>
-                <label><input width="100px " type="radio" name="gender" value="false">Nữ</label>
+            <td>Birthday:</td>
+            <td><input type="date" name="dob" value="${customer.dob}">
             </td>
         </tr>
         <tr>
+            <td>Gender:</td>
+            <c:if test="${customer.gender == true}">
+                <td>
+                    <label><input width="100px" type="radio" name="gender" value="true" checked>Nam</label>
+                    <label><input width="100px " type="radio" name="gender" value="false">Nữ</label>
+                </td>
+            </c:if>
+            <c:if test="${customer.gender == false}">
+                <td>
+                    <label><input width="100px" type="radio" name="gender" value="true">Nam</label>
+                    <label><input width="100px " type="radio" name="gender" value="false" checked>Nữ</label>
+                </td>
+            </c:if>
+        </tr>
+        <tr>
             <td>ID card:</td>
-            <td><input type="text" name="idcard" pattern="^\d{9}(\d{3})?$" title="ID Card include 9 or 12 numbers"
-                       required></td>
+            <td><input type="text" name="idcard" value="${customer.idCard}"></td>
         </tr>
         <tr>
             <td>Phone:</td>
-            <td><input type="text" pattern="^0\d{9}$" name="phone" required title="Format: 0XXXXXXXXX"></td>
+            <td><input type="text" name="phone" value="${customer.phone}"></td>
         </tr>
         <tr>
             <td>Address:</td>
-            <td><input type="text" name="address" required></td>
+            <td><input type="text" name="address" value="${customer.address}"></td>
         </tr>
         <tr>
             <td>Email:</td>
-            <td><input type="text" name="email" pattern="^.*@gmail.com" title="******@gmail.com" required></td>
+            <td><input type="text" name="email" value="${customer.email}"></td>
         </tr>
         <tr>
             <td>Customer type:</td>
             <td>
                 <select name="typeCustomer">
-                    <option value="1">Diamond</option>
-                    <option value="2">Platinium</option>
-                    <option value="3">Gold</option>
-                    <option value="4">Silver</option>
-                    <option value="5">Member</option>
+                    <c:forEach items="${list}" var="type" varStatus="loop">
+                        <option value="${type.id}">${type.type}</option>
+                    </c:forEach>
                 </select>
             </td>
         </tr>
